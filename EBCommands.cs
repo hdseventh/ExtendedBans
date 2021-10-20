@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TShockAPI;
 using TShockAPI.DB;
+using Microsoft.Xna.Framework;
 
 namespace ExtendedBans
 {
@@ -63,7 +64,7 @@ namespace ExtendedBans
                 List<EBPlayer> plrs = EBPlayer.GetPlayersByIPMask(IP);
                 foreach (EBPlayer plr in plrs)
                 {
-                    TShock.Utils.Kick(plr.TSPlayer, "You have been banned: " + Reason, false, false, args.Player.Name, true);
+                    plr.TSPlayer.Kick("You have been banned: " + Reason, false, false, args.Player.Name, true);
                 }
                 args.Player.SendMessage(IP + " has been banned!.", Color.Yellow);
             }
@@ -127,7 +128,7 @@ namespace ExtendedBans
                 {
                     EBData.DBSqlite.Query("INSERT INTO BannedPlayer (Player, BanDate, UnbanDate, BannedBy, Reason) VALUES (@0, @1, @2, @3, @4)", Player, BanDate, UnbanDate, BannedBy, Reason);
                 }
-                if(plrs.Count > 0) TShock.Utils.Kick(plrs[0].TSPlayer, "You have been banned: " + Reason, false, false, args.Player.Name, true);
+                if(plrs.Count > 0) plrs[0].TSPlayer.Kick("You have been banned: " + Reason, false, false, args.Player.Name, true);
                 args.Player.SendMessage(Player + " has been banned!", Color.Yellow);
             }
             else

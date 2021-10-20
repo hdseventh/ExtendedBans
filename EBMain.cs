@@ -8,10 +8,11 @@ using TerrariaApi.Server;
 using TShockAPI.DB;
 using TShockAPI.Net;
 using TShockAPI.Hooks;
+using Microsoft.Xna.Framework;
 
 namespace ExtendedBans
 {
-    [ApiVersion(1, 22)]
+    [ApiVersion(2, 1)]
     public class ExtendedBans : TerrariaPlugin
     {
         public static string SavePath = "tshock";
@@ -93,7 +94,7 @@ namespace ExtendedBans
 
             if (ban[0] == "banned")
             {
-                TShock.Utils.Kick(player, string.Format("You are banned: {0}", ban[5]), true, true, null, true);
+                player.Kick(string.Format("You are banned: {0}", ban[5]), true, true, null, true);
                 e.Handled = true;
                 return;
             }
@@ -112,7 +113,7 @@ namespace ExtendedBans
 
             if (ban[0] == "banned")
             {
-                TShock.Utils.Kick(player, string.Format("You are banned: {0}", ban[5]), true, true, null, true);
+                player.Kick(string.Format("You are banned: {0}", ban[5]), true, true, null, true);
                 e.Handled = true;
                 return;
             }
